@@ -1,0 +1,39 @@
+body {
+    background-color: lightgrey;
+}
+#carre_1 {
+    background-color: red;
+    height: 100px;
+    width: 100px;
+    margin: auto;
+    position: relative;
+    left: 0px;
+    top: 0px;
+}
+.carre_2 {
+    background-color: dodgerblue;
+    height: 100px;
+    width: 100px;
+    margin: auto;
+    position: relative;
+    left: 0px;
+    top: 0px;
+}
+#plateau {
+    height: 500px;
+    width: 500px;
+    margin: auto;
+    position: relative;
+    top: 80px;
+}
+table {
+    background-color: white;
+    border-collapse: collapse;
+    height: 500px;
+    width: 500px;
+}
+td {
+    border: 5px solid lightgrey;
+    height: 110px;
+    width: 110px;
+}
