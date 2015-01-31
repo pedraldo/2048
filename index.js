@@ -31,7 +31,7 @@ var main = function(){
 		switch(keyCode){
 			/*Gauche*/
 			case 37:
-				var id_s = $("#carre_1").parent().attr("id");
+				var id_s = $(".carre_1").parent().attr("id");
 				var id = parseInt(id_s);
 
 				if(id > 4 && id < 9) place_trouve = 5;
@@ -61,16 +61,16 @@ var main = function(){
 				var id_place_trouve = "#"+place_trouve;
 				decalage = '-='+decalage+'px';
 
-				$("#carre_1").animate({left: decalage},200,function(){
-					$("#carre_1").remove();
-					$(id_place_trouve).append("<div id='carre_1'></div>");	
+				$(".carre_1").animate({left: decalage},200,function(){
+					$(".carre_1").remove();
+					$(id_place_trouve).append("<div class='carre_1'></div>");	
 				});
 
 			break;
 
 			/*Haut*/
 			case 38:
-				var id_s = $("#carre_1").parent().attr("id");
+				var id_s = $(".carre_1").parent().attr("id");
 				var id = parseInt(id_s);
 
 				if(id == 1 || id == 5 || id == 9 || id == 13) place_trouve = 1;
@@ -100,15 +100,15 @@ var main = function(){
 				var id_place_trouve = "#"+place_trouve;
 				decalage = '-='+decalage+'px';
 
-				$("#carre_1").animate({top: decalage},200,function(){
-					$("#carre_1").remove();
-					$(id_place_trouve).append("<div id='carre_1'></div>");
+				$(".carre_1").animate({top: decalage},200,function(){
+					$(".carre_1").remove();
+					$(id_place_trouve).append("<div class='carre_1'></div>");
 				});
 			break;
 
 			/*Droite*/
 			case 39:
-				var id_s = $("#carre_1").parent().attr("id");
+				var id_s = $(".carre_1").parent().attr("id");
 				var id = parseInt(id_s);
 
 				if(id > 4 && id < 9) place_trouve = 8;
@@ -137,16 +137,16 @@ var main = function(){
 				var id_place_trouve = "#"+place_trouve;
 				decalage = '+='+decalage+'px';
 
-				$("#carre_1").animate({left: decalage},200,function(){
-					$("#carre_1").remove();
-					$(id_place_trouve).append("<div id='carre_1'></div>");
+				$(".carre_1").animate({left: decalage},200,function(){
+					$(".carre_1").remove();
+					$(id_place_trouve).append("<div class='carre_1'></div>");
 				});
 				
 			break;
 
 			/*Bas*/
 			case 40:
-				var id_s = $("#carre_1").parent().attr("id");
+				var id_s = $(".carre_1").parent().attr("id");
 				var id = parseInt(id_s);
 
 				if(id == 1 || id == 5 || id == 9 || id == 13) place_trouve = 13;
@@ -176,9 +176,9 @@ var main = function(){
 				var id_place_trouve = "#"+place_trouve;
 				decalage = '+='+decalage+'px';
 
-				$("#carre_1").animate({top: decalage},200,function(){
-					$("#carre_1").remove();
-					$(id_place_trouve).append("<div id='carre_1'></div>");
+				$(".carre_1").animate({top: decalage},200,function(){
+					$(".carre_1").remove();
+					$(id_place_trouve).append("<div class='carre_1'></div>");
 				});
 			break;
 		}

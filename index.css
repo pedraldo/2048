@@ -1,7 +1,7 @@
 body {
     background-color: lightgrey;
 }
-#carre_1 {
+.carre_1 {
     background-color: red;
     height: 100px;
     width: 100px;
