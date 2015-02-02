@@ -35,7 +35,6 @@ var main = function(){
 		var place_trouve = 0;
 		var recherche_finie = false;
 		var nb_child = -1;
-		var nb_voisins=0;
 
 		var elements_table = new Array();
 		var id_dep_table = new Array();
@@ -52,6 +51,7 @@ var main = function(){
 			var id_s = $(elements[j]).parent().attr("id");
 			var id = parseInt(id_s);
 		
+			var nb_voisins=0;
 
 			switch(keyCode){
 				/*Gauche*/
@@ -65,15 +65,14 @@ var main = function(){
 
 					else place_trouve = 1;
 
-
-					for(k=id-1;k>=place_trouve;k--){
+					for(k=place_trouve;k<id;k++){
 						var case_voisine = document.getElementById(k);
 						if(case_voisine.hasChildNodes()){
 							nb_voisins++;
 						}
 					}
 
-					place_trouve = place_trouve - nb_voisins;
+					place_trouve = place_trouve + nb_voisins;
 
 					// for(var i=place_trouve;i<=id;i++){
 					// 	if(document.getElementById(""+i).hasChildNodes()){
@@ -161,6 +160,15 @@ var main = function(){
 					else if(id > 12) place_trouve = 16;
 
 					else place_trouve = 4;
+
+					for(k=place_trouve;k>id;k--){
+						var case_voisine = document.getElementById(k);
+						if(case_voisine.hasChildNodes()){
+							nb_voisins++;
+						}
+					}
+
+					place_trouve = place_trouve - nb_voisins;
 					
 				
 					// for(var i=place_trouve;i>=id;i--){
@@ -180,6 +188,7 @@ var main = function(){
 					var decalage = deplacement(difference);
 					var id_place_trouve = "#"+place_trouve;
 					decalage = '+='+decalage+'px';
+
 
 					elements_table.push(elements[j]);
 					id_dep_table.push(id);
