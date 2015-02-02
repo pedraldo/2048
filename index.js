@@ -2,6 +2,13 @@ function deplacement(nbcase){
 	return nbcase * 124;
 };
 
+function after_animation(elements_table, id_dep_table, id_arr_table, index_carre){
+	var i=index_carre;
+	document.getElementById(id_dep_table[i]).removeChild(elements_table[i]);
+	var new_div = document.createElement("div");
+	new_div.className = "carre_1";
+	document.getElementById(id_arr_table[i]).appendChild(new_div);
+};
 
 var main = function(){
 
@@ -30,7 +37,13 @@ var main = function(){
 		var nb_child = -1;
 		var nb_voisins=0;
 
+		var elements_table = new Array();
+		var id_dep_table = new Array();
+		var id_arr_table = new Array();
+		var index_carre = 0;
+
 		var elements = $(".carre_1");
+		var elements_objets = $(".carre_1").get();
 
 
 		for(var j=0; j<$(".carre_1").length;j++)
@@ -80,10 +93,16 @@ var main = function(){
 					var id_place_trouve = "#"+place_trouve;
 					decalage = '-='+decalage+'px';
 
-					$(elements[j]).animate({left: decalage},200,function(){
-						$(elements[j]).remove();
-						$("#"+id_place_trouve).append("<div class='carre_1'></div>");	
-					});
+					elements_table.push(elements[j]);
+					id_dep_table.push(id);
+					id_arr_table.push(place_trouve);
+
+					var animation = function(){	
+						after_animation.call(this, elements_table, id_dep_table, id_arr_table, index_carre++);
+					};
+
+
+					$(elements[j]).animate({left: decalage},200,animation);
 
 				break;
 
@@ -133,7 +152,7 @@ var main = function(){
 				break;
 
 				/*Droite*/
-				case 39:
+				case 39: 
 
 					if(id > 4 && id < 9) place_trouve = 8;
 
@@ -162,10 +181,16 @@ var main = function(){
 					var id_place_trouve = "#"+place_trouve;
 					decalage = '+='+decalage+'px';
 
-					$(elements[j]).animate({left: decalage},200,function(){
-						$(elements[j]).remove();
-						$('#'+id_place_trouve).append("<div class='carre_1'></div>");
-					});
+					elements_table.push(elements[j]);
+					id_dep_table.push(id);
+					id_arr_table.push(place_trouve);
+
+					var animation = function(){	
+						after_animation.call(this, elements_table, id_dep_table, id_arr_table, index_carre++);
+					};
+
+
+					$(elements[j]).animate({left: decalage},200,animation);
 					
 				break;
 
