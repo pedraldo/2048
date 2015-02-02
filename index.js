@@ -116,14 +116,14 @@ var main = function(){
 
 					else place_trouve = 4;
 
-					for(k=id-4;k>=place_trouve;k-=4){
+					for(k=place_trouve;k<id;k+=4){
 						var case_voisine = document.getElementById(k);
 						if(case_voisine.hasChildNodes()){
 							nb_voisins++;
 						}
 					}
 
-					place_trouve = place_trouve - nb_voisins;
+					place_trouve = place_trouve + 4*nb_voisins;
 
 
 					// for(var i=place_trouve;i<=id;i+=4){
@@ -144,10 +144,16 @@ var main = function(){
 					var id_place_trouve = "#"+place_trouve;
 					decalage = '-='+decalage+'px';
 
-					$(elements[j]).animate({top: decalage},200,function(){
-						$(elements[j]).remove();
-						$("#"+id_place_trouve).append("<div class='carre_1'></div>");
-					});
+					elements_table.push(elements[j]);
+					id_dep_table.push(id);
+					id_arr_table.push(place_trouve);
+
+					var animation = function(){	
+						after_animation.call(this, elements_table, id_dep_table, id_arr_table, index_carre++);
+					};
+
+					$(elements[j]).animate({top: decalage},200,animation);
+
 				break;
 
 				/*Droite*/
@@ -214,14 +220,14 @@ var main = function(){
 
 					else place_trouve = 16;
 
-					for(k=id+4;k<=place_trouve;k+=4){
+					for(k=place_trouve;k>id;k-=4){
 						var case_voisine = document.getElementById(k);
 						if(case_voisine.hasChildNodes()){
 							nb_voisins++;
 						}
 					}
 
-					place_trouve = place_trouve - nb_voisins;
+					place_trouve = place_trouve - 4*nb_voisins;
 
 					// for(var i=place_trouve;i>=id;i-=4){
 					// 	if(document.getElementById(""+i).hasChildNodes()){
@@ -241,10 +247,16 @@ var main = function(){
 					var id_place_trouve = "#"+place_trouve;
 					decalage = '+='+decalage+'px';
 
-					$(elements[j]).animate({top: decalage},200,function(){
-						$(elements[j]).remove();
-						$(id_place_trouve).append("<div class='carre_1'></div>");
-					});
+					elements_table.push(elements[j]);
+					id_dep_table.push(id);
+					id_arr_table.push(place_trouve);
+
+					var animation = function(){	
+						after_animation.call(this, elements_table, id_dep_table, id_arr_table, index_carre++);
+					};
+
+					$(elements[j]).animate({top: decalage},200,animation);
+					
 				break;
 			}
 		}
