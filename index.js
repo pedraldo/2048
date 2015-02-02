@@ -28,6 +28,7 @@ var main = function(){
 		var place_trouve = 0;
 		var recherche_finie = false;
 		var nb_child = -1;
+		var nb_voisins=0;
 
 		var elements = $(".carre_1");
 
@@ -52,27 +53,36 @@ var main = function(){
 					else place_trouve = 1;
 
 
-					for(var i=place_trouve;i<=id;i++){
-						if(document.getElementById(""+i).hasChildNodes()){
-							if(i==id && !recherche_finie){
-								place_trouve = id;
-								recherche_finie = true;
-							}
-						}
-						else if(!recherche_finie){
-							place_trouve = i;
-							recherche_finie = true;
+					for(k=id-1;k>=place_trouve;k--){
+						var case_voisine = document.getElementById(k);
+						if(case_voisine.hasChildNodes()){
+							nb_voisins++;
 						}
 					}
+
+					place_trouve = place_trouve - nb_voisins;
+
+					// for(var i=place_trouve;i<=id;i++){
+					// 	if(document.getElementById(""+i).hasChildNodes()){
+					// 		if(i==id && !recherche_finie){
+					// 			place_trouve = id;
+					// 			recherche_finie = true;
+					// 		}
+					// 	}
+					// 	else if(!recherche_finie){
+					// 		place_trouve = i;
+					// 		recherche_finie = true;
+					// 	}
+					// }
 
 					var difference = Math.abs(id - place_trouve);
 					var decalage = deplacement(difference);
 					var id_place_trouve = "#"+place_trouve;
 					decalage = '-='+decalage+'px';
 
-					elements[j].animate({left: decalage},200,function(){
-						elements[j].remove();
-						$(id_place_trouve).append("<div class='carre_1'></div>");	
+					$(elements[j]).animate({left: decalage},200,function(){
+						$(elements[j]).remove();
+						$("#"+id_place_trouve).append("<div class='carre_1'></div>");	
 					});
 
 				break;
@@ -88,35 +98,42 @@ var main = function(){
 
 					else place_trouve = 4;
 
-
-					for(var i=place_trouve;i<=id;i+=4){
-						if(document.getElementById(""+i).hasChildNodes()){
-							if(i==id && !recherche_finie){
-								place_trouve = id;
-								recherche_finie = true;
-							}
-						}
-						else if(!recherche_finie){
-							place_trouve = i;
-							recherche_finie = true;
+					for(k=id-4;k>=place_trouve;k-=4){
+						var case_voisine = document.getElementById(k);
+						if(case_voisine.hasChildNodes()){
+							nb_voisins++;
 						}
 					}
+
+					place_trouve = place_trouve - nb_voisins;
+
+
+					// for(var i=place_trouve;i<=id;i+=4){
+					// 	if(document.getElementById(""+i).hasChildNodes()){
+					// 		if(i==id && !recherche_finie){
+					// 			place_trouve = id;
+					// 			recherche_finie = true;
+					// 		}
+					// 	}
+					// 	else if(!recherche_finie){
+					// 		place_trouve = i;
+					// 		recherche_finie = true;
+					// 	}
+					// }
 
 					var difference = Math.abs(id - place_trouve)/4;
 					var decalage = deplacement(difference);
 					var id_place_trouve = "#"+place_trouve;
 					decalage = '-='+decalage+'px';
 
-					elements[j].animate({top: decalage},200,function(){
-						elements[j].remove();
-						$(id_place_trouve).append("<div class='carre_1'></div>");
+					$(elements[j]).animate({top: decalage},200,function(){
+						$(elements[j]).remove();
+						$("#"+id_place_trouve).append("<div class='carre_1'></div>");
 					});
 				break;
 
 				/*Droite*/
 				case 39:
-
-					var nb_voisins=0;
 
 					if(id > 4 && id < 9) place_trouve = 8;
 
@@ -125,16 +142,6 @@ var main = function(){
 					else if(id > 12) place_trouve = 16;
 
 					else place_trouve = 4;
-
-
-					for(k=id+1;k<=place_trouve;k++){
-						var case_voisine = document.getElementById(k);
-						if(case_voisine.hasChildNodes()){
-							nb_voisins++;
-						}
-					}
-
-					place_trouve = place_trouve - nb_voisins;
 					
 				
 					// for(var i=place_trouve;i>=id;i--){
@@ -173,27 +180,35 @@ var main = function(){
 
 					else place_trouve = 16;
 
-
-					for(var i=place_trouve;i>=id;i-=4){
-						if(document.getElementById(""+i).hasChildNodes()){
-							if(i==id && !recherche_finie){
-								place_trouve = id;
-								recherche_finie = true;
-							}
-						}
-						else if(!recherche_finie){
-							place_trouve = i;
-							recherche_finie = true;
+					for(k=id+4;k<=place_trouve;k+=4){
+						var case_voisine = document.getElementById(k);
+						if(case_voisine.hasChildNodes()){
+							nb_voisins++;
 						}
 					}
+
+					place_trouve = place_trouve - nb_voisins;
+
+					// for(var i=place_trouve;i>=id;i-=4){
+					// 	if(document.getElementById(""+i).hasChildNodes()){
+					// 		if(i==id && !recherche_finie){
+					// 			place_trouve = id;
+					// 			recherche_finie = true;
+					// 		}
+					// 	}
+					// 	else if(!recherche_finie){
+					// 		place_trouve = i;
+					// 		recherche_finie = true;
+					// 	}
+					// }
 
 					var difference = Math.abs(id - place_trouve)/4;
 					var decalage = deplacement(difference);
 					var id_place_trouve = "#"+place_trouve;
 					decalage = '+='+decalage+'px';
 
-					$(".carre_1").animate({top: decalage},200,function(){
-						$(".carre_1").remove();
+					$(elements[j]).animate({top: decalage},200,function(){
+						$(elements[j]).remove();
 						$(id_place_trouve).append("<div class='carre_1'></div>");
 					});
 				break;
