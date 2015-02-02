@@ -28,159 +28,176 @@ var main = function(){
 		var place_trouve = 0;
 		var recherche_finie = false;
 		var nb_child = -1;
-		switch(keyCode){
-			/*Gauche*/
-			case 37:
-				var id_s = $(".carre_1").parent().attr("id");
-				var id = parseInt(id_s);
 
-				if(id > 4 && id < 9) place_trouve = 5;
-
-				else if(id > 8 && id < 13) place_trouve = 9;
-
-				else if(id > 12) place_trouve = 13;
-
-				else place_trouve = 1;
+		var elements = $(".carre_1");
 
 
-				for(var i=place_trouve;i<=id;i++){
-					if(document.getElementById(""+i).hasChildNodes()){
-						if(i==id && !recherche_finie){
-							place_trouve = id;
+		for(var j=0; j<$(".carre_1").length;j++)
+		{
+
+			var id_s = $(elements[j]).parent().attr("id");
+			var id = parseInt(id_s);
+		
+
+			switch(keyCode){
+				/*Gauche*/
+				case 37:
+
+					if(id > 4 && id < 9) place_trouve = 5;
+
+					else if(id > 8 && id < 13) place_trouve = 9;
+
+					else if(id > 12) place_trouve = 13;
+
+					else place_trouve = 1;
+
+
+					for(var i=place_trouve;i<=id;i++){
+						if(document.getElementById(""+i).hasChildNodes()){
+							if(i==id && !recherche_finie){
+								place_trouve = id;
+								recherche_finie = true;
+							}
+						}
+						else if(!recherche_finie){
+							place_trouve = i;
 							recherche_finie = true;
 						}
 					}
-					else if(!recherche_finie){
-						place_trouve = i;
-						recherche_finie = true;
-					}
-				}
 
-				var difference = Math.abs(id - place_trouve);
-				var decalage = deplacement(difference);
-				var id_place_trouve = "#"+place_trouve;
-				decalage = '-='+decalage+'px';
+					var difference = Math.abs(id - place_trouve);
+					var decalage = deplacement(difference);
+					var id_place_trouve = "#"+place_trouve;
+					decalage = '-='+decalage+'px';
 
-				$(".carre_1").animate({left: decalage},200,function(){
-					$(".carre_1").remove();
-					$(id_place_trouve).append("<div class='carre_1'></div>");	
-				});
+					elements[j].animate({left: decalage},200,function(){
+						elements[j].remove();
+						$(id_place_trouve).append("<div class='carre_1'></div>");	
+					});
 
-			break;
+				break;
 
-			/*Haut*/
-			case 38:
-				var id_s = $(".carre_1").parent().attr("id");
-				var id = parseInt(id_s);
+				/*Haut*/
+				case 38:
 
-				if(id == 1 || id == 5 || id == 9 || id == 13) place_trouve = 1;
+					if(id == 1 || id == 5 || id == 9 || id == 13) place_trouve = 1;
 
-				else if(id == 2 || id == 6 || id == 10 || id == 14) place_trouve = 2;
+					else if(id == 2 || id == 6 || id == 10 || id == 14) place_trouve = 2;
 
-				else if(id == 3 || id == 7 || id == 11 || id == 15) place_trouve = 3;
+					else if(id == 3 || id == 7 || id == 11 || id == 15) place_trouve = 3;
 
-				else place_trouve = 4;
+					else place_trouve = 4;
 
 
-				for(var i=place_trouve;i<=id;i+=4){
-					if(document.getElementById(""+i).hasChildNodes()){
-						if(i==id && !recherche_finie){
-							place_trouve = id;
+					for(var i=place_trouve;i<=id;i+=4){
+						if(document.getElementById(""+i).hasChildNodes()){
+							if(i==id && !recherche_finie){
+								place_trouve = id;
+								recherche_finie = true;
+							}
+						}
+						else if(!recherche_finie){
+							place_trouve = i;
 							recherche_finie = true;
 						}
 					}
-					else if(!recherche_finie){
-						place_trouve = i;
-						recherche_finie = true;
+
+					var difference = Math.abs(id - place_trouve)/4;
+					var decalage = deplacement(difference);
+					var id_place_trouve = "#"+place_trouve;
+					decalage = '-='+decalage+'px';
+
+					elements[j].animate({top: decalage},200,function(){
+						elements[j].remove();
+						$(id_place_trouve).append("<div class='carre_1'></div>");
+					});
+				break;
+
+				/*Droite*/
+				case 39:
+
+					var nb_voisins=0;
+
+					if(id > 4 && id < 9) place_trouve = 8;
+
+					else if(id > 8 && id < 13) place_trouve = 12;
+
+					else if(id > 12) place_trouve = 16;
+
+					else place_trouve = 4;
+
+
+					for(k=id+1;k<=place_trouve;k++){
+						var case_voisine = document.getElementById(k);
+						if(case_voisine.hasChildNodes()){
+							nb_voisins++;
+						}
 					}
-				}
 
-				var difference = Math.abs(id - place_trouve)/4;
-				var decalage = deplacement(difference);
-				var id_place_trouve = "#"+place_trouve;
-				decalage = '-='+decalage+'px';
-
-				$(".carre_1").animate({top: decalage},200,function(){
-					$(".carre_1").remove();
-					$(id_place_trouve).append("<div class='carre_1'></div>");
-				});
-			break;
-
-			/*Droite*/
-			case 39:
-				var id_s = $(".carre_1").parent().attr("id");
-				var id = parseInt(id_s);
-
-				if(id > 4 && id < 9) place_trouve = 8;
-
-				else if(id > 8 && id < 13) place_trouve = 12;
-
-				else if(id > 12) place_trouve = 16;
-
-				else place_trouve = 4;
+					place_trouve = place_trouve - nb_voisins;
+					
 				
-				for(var i=place_trouve;i>=id;i--){
-					if(document.getElementById(""+i).hasChildNodes()){
-						if(i==id && !recherche_finie){
-							place_trouve = id;
+					// for(var i=place_trouve;i>=id;i--){
+					// 	if(document.getElementById(""+i).hasChildNodes()){
+					// 		if(i==id && !recherche_finie){
+					// 			place_trouve = id;
+					// 			recherche_finie = true;
+					// 		}
+					// 	}
+					// 	else if(!recherche_finie){
+					// 		place_trouve = i;
+					// 		recherche_finie = true;
+					// 	}
+					// }
+
+					var difference = Math.abs(id - place_trouve);
+					var decalage = deplacement(difference);
+					var id_place_trouve = "#"+place_trouve;
+					decalage = '+='+decalage+'px';
+
+					$(elements[j]).animate({left: decalage},200,function(){
+						$(elements[j]).remove();
+						$('#'+id_place_trouve).append("<div class='carre_1'></div>");
+					});
+					
+				break;
+
+				/*Bas*/
+				case 40:
+
+					if(id == 1 || id == 5 || id == 9 || id == 13) place_trouve = 13;
+
+					else if(id == 2 || id == 6 || id == 10 || id == 14) place_trouve = 14;
+
+					else if(id == 3 || id == 7 || id == 11 || id == 15) place_trouve = 15;
+
+					else place_trouve = 16;
+
+
+					for(var i=place_trouve;i>=id;i-=4){
+						if(document.getElementById(""+i).hasChildNodes()){
+							if(i==id && !recherche_finie){
+								place_trouve = id;
+								recherche_finie = true;
+							}
+						}
+						else if(!recherche_finie){
+							place_trouve = i;
 							recherche_finie = true;
 						}
 					}
-					else if(!recherche_finie){
-						place_trouve = i;
-						recherche_finie = true;
-					}
-				}
 
-				var difference = Math.abs(id - place_trouve);
-				var decalage = deplacement(difference);
-				var id_place_trouve = "#"+place_trouve;
-				decalage = '+='+decalage+'px';
+					var difference = Math.abs(id - place_trouve)/4;
+					var decalage = deplacement(difference);
+					var id_place_trouve = "#"+place_trouve;
+					decalage = '+='+decalage+'px';
 
-				$(".carre_1").animate({left: decalage},200,function(){
-					$(".carre_1").remove();
-					$(id_place_trouve).append("<div class='carre_1'></div>");
-				});
-				
-			break;
-
-			/*Bas*/
-			case 40:
-				var id_s = $(".carre_1").parent().attr("id");
-				var id = parseInt(id_s);
-
-				if(id == 1 || id == 5 || id == 9 || id == 13) place_trouve = 13;
-
-				else if(id == 2 || id == 6 || id == 10 || id == 14) place_trouve = 14;
-
-				else if(id == 3 || id == 7 || id == 11 || id == 15) place_trouve = 15;
-
-				else place_trouve = 16;
-
-
-				for(var i=place_trouve;i>=id;i-=4){
-					if(document.getElementById(""+i).hasChildNodes()){
-						if(i==id && !recherche_finie){
-							place_trouve = id;
-							recherche_finie = true;
-						}
-					}
-					else if(!recherche_finie){
-						place_trouve = i;
-						recherche_finie = true;
-					}
-				}
-
-				var difference = Math.abs(id - place_trouve)/4;
-				var decalage = deplacement(difference);
-				var id_place_trouve = "#"+place_trouve;
-				decalage = '+='+decalage+'px';
-
-				$(".carre_1").animate({top: decalage},200,function(){
-					$(".carre_1").remove();
-					$(id_place_trouve).append("<div class='carre_1'></div>");
-				});
-			break;
+					$(".carre_1").animate({top: decalage},200,function(){
+						$(".carre_1").remove();
+						$(id_place_trouve).append("<div class='carre_1'></div>");
+					});
+				break;
+			}
 		}
 	});
 };
