@@ -9,6 +9,12 @@ body {
     position: relative;
     left: 0px;
     top: 0px;
+    color: white;
+    line-height: 100px;
+    text-align: center;
+    font-size: 30pt;
+    font-family: Helvetica Neue;
+    font-weight: 100;
 }
 .carre_2 {
     background-color: dodgerblue;
