@@ -2,7 +2,7 @@ body {
     background-color: lightgrey;
 }
 .carre_1 {
-    background-color: red;
+    /*background-color: red;*/
     height: 100px;
     width: 100px;
     margin: auto;
@@ -12,19 +12,31 @@ body {
     color: white;
     line-height: 100px;
     text-align: center;
-    font-size: 30pt;
+    font-size: 27pt;
     font-family: Helvetica Neue;
     font-weight: 100;
 }
-.carre_2 {
-    background-color: dodgerblue;
-    height: 100px;
-    width: 100px;
-    margin: auto;
-    position: relative;
-    left: 0px;
-    top: 0px;
-}
+
+.c2 { background-color: #00BBFF ; }
+.c4 { background-color: #0099FF ; }
+.c8 { background-color: #0066FF ; }
+.c16 { background-color: #0033FF ; }
+
+.c32 { background-color: #66FF00 ; }
+.c64 { background-color: #00FF00 ; }
+.c128 { background-color: #33CC00 ; }
+.c256 { background-color: #009900 ; }
+
+.c512 { background-color: #FFCC00 ; }
+.c1024 { background-color: #FF9900 ; }
+.c2048 { background-color: #FF6600 ; }
+.c4096 { background-color: #FF3300 ; }
+
+.c8192 { background-color: #CC66FF ; }
+.c16384 { background-color: #CC00FF ; font-size: 24pt; }
+.c32768 { background-color: #9900FF ; font-size: 24pt; }
+.c65536 { background-color: #6600CC ; font-size: 24pt; }
+
 #plateau {
     height: 500px;
     width: 500px;

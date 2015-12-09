@@ -365,13 +365,18 @@ function after_animation(elements_table, id_dep_table, id_arr_table, index_carre
 	var superimposed = false;
 	var element = document.getElementById(id_dep_table[i]);
 	var value = parseInt(element.firstChild.innerHTML);
+	var value2x;
+	var className;
 	element.removeChild(element.firstChild);
 
 	for (var j=0; j<i; j++) {
 
 		if (id_arr_table[j] == id_arr_table[i]) {
 
-			document.getElementById(id_arr_table[j].toString()).firstChild.innerHTML = 2*value;
+			value2x = 2*value;
+			className = "carre_1 c"+value2x;
+			document.getElementById(id_arr_table[j]).firstChild.innerHTML = value2x;
+			document.getElementById(id_arr_table[j]).firstChild.className = className;
 			superimposed = true;
 
 		}
@@ -381,7 +386,8 @@ function after_animation(elements_table, id_dep_table, id_arr_table, index_carre
 	if (!superimposed) {
 
 		var new_div = document.createElement("div");
-		new_div.className = "carre_1";
+		className = "carre_1 c"+value;
+		new_div.className = className;
 		new_div.innerHTML = value;
 
 		document.getElementById(id_arr_table[i]).appendChild(new_div);
@@ -400,6 +406,8 @@ function after_animation(elements_table, id_dep_table, id_arr_table, index_carre
 		}
 
 	}
+
+	
 
 	if (i == id_dep_table.length-1 && noMotion == false) {
 
@@ -421,7 +429,7 @@ function after_animation(elements_table, id_dep_table, id_arr_table, index_carre
 		futureNewSquare = Math.floor((Math.random() * (tabEmpty.length-1)) + 0);
 
 		var new_div = document.createElement("div");
-		new_div.className = "carre_1";
+		new_div.className = "carre_1 c2";
 		new_div.innerHTML = "2";
 
 		document.getElementById(tabEmpty[futureNewSquare]+1).appendChild(new_div);
@@ -528,6 +536,8 @@ var main = function(){
 
 				}
 
+				
+
 
 				// tabInit = getGameStateInArray();
 				
@@ -546,7 +556,7 @@ var main = function(){
 				// var new_div = document.createElement("div");
 				// new_div.className = "carre_1";
 				// new_div.innerHTML = "2";
-				// debugger;
+				// 
 
 				// document.getElementById(tabEmpty[futureNewSquare]+1).appendChild(new_div);
 
@@ -647,7 +657,7 @@ var main = function(){
 				// var new_div = document.createElement("div");
 				// new_div.className = "carre_1";
 				// new_div.innerHTML = "2";
-				// debugger;
+				// 
 
 				// document.getElementById(tabEmpty[futureNewSquare]+1).appendChild(new_div);
 
@@ -750,7 +760,7 @@ var main = function(){
 				// var new_div = document.createElement("div");
 				// new_div.className = "carre_1";
 				// new_div.innerHTML = "2";
-				// debugger;
+				// 
 
 				// document.getElementById(tabEmpty[futureNewSquare]+1).appendChild(new_div);
 				
@@ -852,7 +862,7 @@ var main = function(){
 				// var new_div = document.createElement("div");
 				// new_div.className = "carre_1";
 				// new_div.innerHTML = "2";
-				// debugger;
+				// 
 
 				// document.getElementById(tabEmpty[futureNewSquare]+1).appendChild(new_div);
 
