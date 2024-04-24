@@ -1,3 +1,20 @@
+//http://davidwalsh.name/javascript-debounce-function
+function debounce(func, wait, immediate) {
+  var timeout;
+  return function () {
+    var context = this,
+      args = arguments;
+    var later = function () {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
+    };
+    var callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+    if (callNow) func.apply(context, args);
+  };
+}
+
 function move(nbcase) {
   const width = document.getElementById("plateau").offsetWidth;
   return nbcase * (width / 4 - 2);
@@ -280,7 +297,7 @@ const main = function () {
   document.addEventListener("touchstart", handleTouchStart, false);
   document.addEventListener("touchmove", handleTouchMove, { passive: false });
   document.addEventListener("touchend", handleTouchEnd, false);
-  $(document).keydown(handleKeyDown);
+  $(document).keydown(debounce(handleKeyDown, 200, true));
 
   function getTouches(event) {
     return (
@@ -394,7 +411,7 @@ const main = function () {
           offset = "-=" + offset + "px";
 
           (function (j) {
-            $(elements[j]).animate({ left: offset }, 200, function () {
+            $(elements[j]).animate({ left: offset }, 150, function () {
               after_animation(id_dep_table, id_arr_table, j);
             });
           })(j);
@@ -438,7 +455,7 @@ const main = function () {
           offset = "-=" + offset + "px";
 
           (function (j) {
-            $(elements[j]).animate({ top: offset }, 200, function () {
+            $(elements[j]).animate({ top: offset }, 150, function () {
               after_animation(id_dep_table, id_arr_table, j);
             });
           })(j);
@@ -484,7 +501,7 @@ const main = function () {
           offset = "+=" + offset + "px";
 
           (function (j) {
-            $(elements[j]).animate({ left: offset }, 200, function () {
+            $(elements[j]).animate({ left: offset }, 150, function () {
               after_animation(id_dep_table, id_arr_table, j);
             });
           })(j);
@@ -528,7 +545,7 @@ const main = function () {
           offset = "+=" + offset + "px";
 
           (function (j) {
-            $(elements[j]).animate({ top: offset }, 200, function () {
+            $(elements[j]).animate({ top: offset }, 150, function () {
               after_animation(id_dep_table, id_arr_table, j);
             });
           })(j);
