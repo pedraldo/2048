@@ -1,4 +1,4 @@
-function deplacement(nbcase) {
+function move(nbcase) {
   return nbcase * 124;
 }
 
@@ -270,8 +270,85 @@ function after_animation(id_dep_table, id_arr_table, index_carre) {
 }
 
 const main = function () {
-  $(document).keydown(function (event) {
+  let direction = null;
+  let xTouchStart = null;
+  let yTouchStart = null;
+  let xTouchEnd = null;
+  let yTouchEnd = null;
+
+  document.addEventListener("touchstart", handleTouchStart, false);
+  document.addEventListener("touchmove", handleTouchMove, { passive: false });
+  document.addEventListener("touchend", handleTouchEnd, false);
+  $(document).keydown(handleKeyDown);
+
+  function getTouches(event) {
+    return (
+      event.touches || // browser API
+      event.originalEvent.touches // jQuery
+    );
+  }
+
+  function handleTouchStart(event) {
+    const touch = getTouches(event)[0];
+    xTouchStart = touch.clientX;
+    yTouchStart = touch.clientY;
+  }
+
+  function handleTouchMove(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    const touch = getTouches(event)[0];
+    xTouchEnd = touch.clientX;
+    yTouchEnd = touch.clientY;
+
+    return false;
+  }
+
+  function handleTouchEnd() {
+    const xDiff = xTouchStart - xTouchEnd;
+    const yDiff = yTouchStart - yTouchEnd;
+
+    if (Math.abs(xDiff) > Math.abs(yDiff)) {
+      if (xDiff < 0) {
+        /* right swipe */
+        direction = "right";
+      } else {
+        /* left swipe */
+        direction = "left";
+      }
+    } else {
+      if (yDiff < 0) {
+        /* down swipe */
+        direction = "down";
+      } else {
+        /* up swipe */
+        direction = "up";
+      }
+    }
+
+    handleUserAction(direction);
+  }
+
+  function handleKeyDown(event) {
     const keyCode = event.which;
+    switch (keyCode) {
+      case 37:
+        direction = "left";
+        break;
+      case 38:
+        direction = "up";
+        break;
+      case 39:
+        direction = "right";
+        break;
+      case 40:
+        direction = "down";
+        break;
+    }
+    handleUserAction(direction);
+  }
+
+  function handleUserAction(direction) {
     const id_dep_table = new Array();
     const id_arr_table = new Array();
     const elements = $(".carre_1");
@@ -283,9 +360,8 @@ const main = function () {
     let tabsString;
     let indexTabsFin = 0;
 
-    switch (keyCode) {
-      /* Left */
-      case 37:
+    switch (direction) {
+      case "left":
         for (let j = 0; j < 4; j++) {
           for (let i = 0; i < 4; i++) {
             // line initial table
@@ -317,7 +393,7 @@ const main = function () {
 
           id_dep_table.push(idHTML);
           id_arr_table.push(idHTML - offset);
-          offset = deplacement(offset);
+          offset = move(offset);
           offset = "-=" + offset + "px";
 
           (function (j) {
@@ -329,8 +405,7 @@ const main = function () {
 
         break;
 
-      /* Top */
-      case 38:
+      case "up":
         for (let j = 0; j < 4; j++) {
           for (let i = 0; i < 4; i++) {
             // line initial table
@@ -362,7 +437,7 @@ const main = function () {
 
           id_dep_table.push(idHTML);
           id_arr_table.push(idHTML - offset * 4);
-          offset = deplacement(offset);
+          offset = move(offset);
           offset = "-=" + offset + "px";
 
           (function (j) {
@@ -374,8 +449,7 @@ const main = function () {
 
         break;
 
-      /* Right */
-      case 39:
+      case "right":
         for (let j = 0; j < 4; j++) {
           for (let i = 0; i < 4; i++) {
             // line initial table
@@ -409,7 +483,7 @@ const main = function () {
 
           id_dep_table.push(idHTML);
           id_arr_table.push(idHTML + offset);
-          offset = deplacement(offset);
+          offset = move(offset);
           offset = "+=" + offset + "px";
 
           (function (j) {
@@ -421,8 +495,7 @@ const main = function () {
 
         break;
 
-      /* Bottom */
-      case 40:
+      case "down":
         for (let j = 0; j < 4; j++) {
           for (let i = 0; i < 4; i++) {
             // line initial table
@@ -454,7 +527,7 @@ const main = function () {
 
           id_dep_table.push(idHTML);
           id_arr_table.push(idHTML + offset * 4);
-          offset = deplacement(offset);
+          offset = move(offset);
           offset = "+=" + offset + "px";
 
           (function (j) {
@@ -465,7 +538,7 @@ const main = function () {
         }
         break;
     }
-  });
+  }
 };
 
 $(document).ready(main);
