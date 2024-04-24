@@ -89,3 +89,65 @@ td {
   height: 110px;
   width: 110px;
 }
+
+@media only screen and (max-width: 520px) {
+  #plateau {
+    height: 400px;
+    width: 400px;
+  }
+  table {
+    height: 400px;
+    width: 400px;
+  }
+  td {
+    border-width: 5px;
+    height: 80px;
+    width: 80px;
+  }
+  .carre_1 {
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    font-size: 24pt;
+  }
+  .c16384 {
+    font-size: 20pt;
+  }
+  .c32768 {
+    font-size: 20pt;
+  }
+  .c65536 {
+    font-size: 20pt;
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  #plateau {
+    height: 360px;
+    width: 360px;
+  }
+  table {
+    height: 360px;
+    width: 360px;
+  }
+  td {
+    border-width: 4px;
+    height: 70px;
+    width: 70px;
+  }
+  .carre_1 {
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    font-size: 20pt;
+  }
+  .c16384 {
+    font-size: 16pt;
+  }
+  .c32768 {
+    font-size: 16pt;
+  }
+  .c65536 {
+    font-size: 16pt;
+  }
+}

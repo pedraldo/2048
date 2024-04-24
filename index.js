@@ -1,5 +1,6 @@
 function move(nbcase) {
-  return nbcase * 124;
+  const width = document.getElementById("plateau").offsetWidth;
+  return nbcase * (width / 4 - 2);
 }
 
 function convertRight(n) {
@@ -310,18 +311,14 @@ const main = function () {
 
     if (Math.abs(xDiff) > Math.abs(yDiff)) {
       if (xDiff < 0) {
-        /* right swipe */
         direction = "right";
       } else {
-        /* left swipe */
         direction = "left";
       }
     } else {
       if (yDiff < 0) {
-        /* down swipe */
         direction = "down";
       } else {
-        /* up swipe */
         direction = "up";
       }
     }
